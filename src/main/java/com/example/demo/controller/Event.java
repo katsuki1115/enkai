@@ -9,12 +9,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.example.demo.service.EventService;
 
 @Controller
-@RequestMapping("/")
+@RequestMapping("/enkai")
 public class Event {
 	@Autowired
 	EventService eventservice;
 	
-	@GetMapping(value = "/enkai")
+	@GetMapping(value = {"/", ""})
 	public String list(Event event, Model model) {
 		model.addAttribute("event", event);
 		return "home/home";

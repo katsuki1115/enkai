@@ -25,12 +25,12 @@ public class SecurityConfig {
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http.authorizeHttpRequests(authorize -> authorize
-				.requestMatchers("/users/login", "/error", "/admin/users/logout", "/users/create").permitAll()
+				.requestMatchers("/users/login", "/error", "/admin/users/logout", "/users/create","/enkai").permitAll()
 				.requestMatchers("/webjars/**", "/css/**", "/js/**").permitAll()
 				.anyRequest().authenticated())
 				.formLogin(form -> form
 						.loginProcessingUrl("/users/login")
-						.loginPage("/login/login")
+						.loginPage("/users/login")
 						.defaultSuccessUrl("/admin")
 						.failureUrl("/users/login?error"))
 				.logout(logout -> logout
@@ -53,6 +53,8 @@ public class SecurityConfig {
 
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		// userDetailsServiceを使用して、DBからユーザを参照できるようにします
-		auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+		auth
+		.userDetailsService(new UserDetailsServiceImpl())
+		.passwordEncoder(passwordEncoder());
 	}
 }

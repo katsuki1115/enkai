@@ -42,5 +42,13 @@ public class UserDao implements BaseDao<User> {
 			System.out.println("no data");
 		}
 	}
+	
+	public User findByEmail(String email) throws DataNotFoundException {
+		User user = this.repository.findByEmail(email);
+		if(user == null) {
+			throw new DataNotFoundException();
+		}
+		return user;
+	}
 
 }

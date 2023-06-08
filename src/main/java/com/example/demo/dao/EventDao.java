@@ -3,11 +3,13 @@ package com.example.demo.dao;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import com.example.demo.common.DataNotFoundException;
 import com.example.demo.entity.Event;
 import com.example.demo.repository.EventRepository;
 
+@Repository
 public class EventDao implements BaseDao<Event>{
 	@Autowired
 	EventRepository repository;
