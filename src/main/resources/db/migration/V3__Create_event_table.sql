@@ -1,7 +1,7 @@
 CREATE TABLE events(
 	id int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT COMMENT 'イベントID',
-	name varcher(255) NOT NULL COMMENT 'イベント名',
-	detail varcher(255) NOT NULL COMMENT 'イベント詳細',
+	name varchar(255) NOT NULL COMMENT 'イベント名',
+	detail varchar(255) NOT NULL COMMENT 'イベント詳細',
 	max_participant int(11) NOT NULL COMMENT '最大参加人数',
 	category_id int(11) NOT NULL COMMENT 'カテゴリID',
 	user_id int(11) NOT NULL COMMENT 'ユーザID',

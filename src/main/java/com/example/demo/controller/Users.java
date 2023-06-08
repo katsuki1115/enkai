@@ -56,7 +56,7 @@ public class Users {
 			flash = new FlashData().danger("処理中にエラーが発生しました");
 		}
 		ra.addFlashAttribute("flash", flash);
-		return "redirect:/users/login";
+		return "redirect:/login";
 	}
 	
 	/*
@@ -65,5 +65,10 @@ public class Users {
 	@GetMapping(value = "/login")
 	public String loginForm(User user, Model model) {
 		return "users/login";
+	}
+	
+	@PostMapping(value = "/login")
+	public String login() {
+		return "redirect:/admin/admin_home";
 	}
 }
