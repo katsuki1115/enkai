@@ -26,12 +26,13 @@
 				<tr th:each="event: ${events}" th:object="${event}">
 					<td th:text="*{name}"></td>
 					<td th:text="*{max_participant}"></td>
-					<td th:text="*{event_users.id}"></td>
-					<td th:text="*{categories.name}"></td>
+<!--					<td th:text="*{eventuser.counter}"></td>-->
+					<td th:text="*{category.name}"></td>
+					<td th:text="*{user.email}"></td>
 					<td th:text="*{#dates.format(createdAt, 'yyyy年MM月dd日HH時mm分ss秒')}"></td>
 					<td th:text="*{#dates.format(modifiedAt, 'yyyy年MM月dd日HH時mm分ss秒')}"></td>
 					<td class="actions text-nowrap">
-						<a th:href="@{events/view/{id}(id=*{id})}" class="btn btn-primary">リンク</a>
+						<a th:href="@{/admin/events/view/{id}(id=*{id})}" class="btn btn-primary">リンク</a>
 					</td>
 				</tr>
 			</tbody>

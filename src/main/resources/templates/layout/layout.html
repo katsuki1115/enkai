@@ -16,7 +16,12 @@
 	<nav class="navbar navbar-expand-md navbar-light bg-light shadow-sm">
 		<div class="container-fluid col-sm-10">
 			<div class="navbar-header">
-				<a th:href="@{/enkai}" class="navbar-brand">宴会くん</a>
+				<ul sec:authorize="!authenticated" class="navbar-nav mr-auto">
+					<a th:href="@{/enkai}" class="navbar-brand">宴会くん</a>
+				</ul>
+				<ul sec:authorize="authenticated" class="navbar-nav mr-auto">
+					<a th:href="@{/admin}" class="navbar-brand">宴会くん</a>
+				</ul>
 			</div>
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
 				data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false">
@@ -34,29 +39,22 @@
 				</ul>
 				<ul sec:authorize="authenticated" class="navbar-nav mr-auto">
 					<li class="nav-item dropdown">
-						<a href="javascript:void(0)" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">受注</a>
+						<a href="javascript:void(0)" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">イベント</a>
 						<ul class="dropdown-menu">
-							<li><a th:href="@{/admin/orders}" class="dropdown-item">一覧</a></li>
-							<li><a th:href="@{/admin/orders/create}" class="dropdown-item">新規作成</a></li>
+							<li><a th:href="@{/admin/events/mylist}" class="dropdown-item">マイイベント一覧</a></li>
+							<li><a th:href="@{/admin/events/create}" class="dropdown-item">新規作成</a></li>
 						</ul>
 					</li>
 					<li class="nav-item dropdown">
-						<a href="javascript:void(0)" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">商品</a>
+						<a href="javascript:void(0)" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">カテゴリ</a>
 						<ul class="dropdown-menu">
-							<li><a th:href="@{/admin/products}" class="dropdown-item">一覧</a></li>
-							<li><a th:href="@{/admin/products/create}" class="dropdown-item">新規作成</a></li>
-						</ul>
-					</li>
-					<li class="nav-item dropdown">
-						<a href="javascript:void(0)" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">顧客</a>
-						<ul class="dropdown-menu">
-							<li><a th:href="@{/admin/customers}" class="dropdown-item">一覧</a></li>
-							<li><a th:href="@{/admin/customers/create}" class="dropdown-item">新規作成</a></li>
+							<li><a th:href="@{/admin/categories}" class="dropdown-item">カテゴリ一覧</a></li>
+							<li><a th:href="@{/admin/categories/create}" class="dropdown-item">新規作成</a></li>
 						</ul>
 					</li>
 				</ul>
 				<ul sec:authorize="authenticated" class="navbar-nav ml-auto">
-					<li class ="navbar-text mr-3"><span sec:authentication="name" class="me-2"></span>さん</li>
+					<li class="navbar-text mr-3"><span sec:authentication="name" class="me-2"></span>さん</li>
 					<li class="nav-item dropdown">
 						<a href="javascript:void(0)" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">管理</a>
 						<ul class="dropdown-menu">

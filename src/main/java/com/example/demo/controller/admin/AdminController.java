@@ -1,5 +1,7 @@
 package com.example.demo.controller.admin;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -7,22 +9,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.demo.entity.Event;
-import com.example.demo.service.UserService;
+import com.example.demo.service.BaseService;
 
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
 	@Autowired
-	UserService userService;
+	BaseService<Event> eventService;
 	
 	@GetMapping(value = {"/",""})
-	public String admin(Event event, Model model) {
-		model.addAttribute("event", event);
+	public String list(Event event, Model model) {
+		List<Event> events = eventService.findAll();
+		model.addAttribute("events", events);
 		return "admin/admin_home";
-	}
-	
-	@GetMapping(value = "/users/logout")
-	public String logout() {
-		return "redirect:enkai";
 	}
 }

@@ -17,7 +17,7 @@ import com.example.demo.service.UserService;
 
 @Controller
 @RequestMapping("/users")
-public class Users {
+public class UsersController {
 	@Autowired
 	UserService userService;
 	

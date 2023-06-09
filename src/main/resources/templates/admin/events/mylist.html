@@ -8,7 +8,7 @@
 
 <body>
 	<div layout:fragment="content">
-		<h1>イベント一覧</h1>
+		<h1>マイイベント一覧</h1>
 		<table class="table table-striped mt-4">
 			<thead class="bg-primary text-white">
 				<tr>
@@ -32,7 +32,8 @@
 					<td th:text="*{#dates.format(createdAt, 'yyyy年MM月dd日HH時mm分ss秒')}"></td>
 					<td th:text="*{#dates.format(modifiedAt, 'yyyy年MM月dd日HH時mm分ss秒')}"></td>
 					<td class="actions text-nowrap">
-						<a th:href="@{/admin/events/view/{id}(id=*{id})}" class="btn btn-primary">リンク</a>
+						<a th:href="@{/admin/events/edit/{id}(id=*{id})}" class="btn btn-primary">編集</a>
+						<a th:href="@{/admin/events/delete/{id}(id=*{id})}" class="btn btn-primary">削除</a>
 					</td>
 				</tr>
 			</tbody>

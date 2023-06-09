@@ -37,5 +37,4 @@ public class EventUserService implements BaseService<EventUser> {
 		// TODO 自動生成されたメソッド・スタブ
 		dao.deleteById(id);
 	}
-
 }

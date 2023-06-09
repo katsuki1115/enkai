@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/layout}">
+
+<head>
+	<meta charset="UTF-8" th:remove="tag">
+</head>
+
+<body>
+	<div layout:fragment="content">
+		<h1>イベント詳細</h1>
+		<table class="table table-striped mt-4">
+			<thead class="bg-primary text-white">
+				<tr>
+					<th>ID</th>
+					<th>イベント名</th>
+					<th>最大人数</th>
+					<th>カテゴリ</th>
+					<th>管理ユーザ</th>
+					<th>作成日時</th>
+					<th>更新日時</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="event: ${event}" th:object="${event}">
+					<td th:text="*{id}"></td>
+					<td th:text="*{name}"></td>
+					<td th:text="*{max_participant}"></td>
+					<td th:text="*{category.name}"></td>
+					<td th:text="*{user.email}"></td>
+					<td th:text="*{#dates.format(createdAt, 'yyyy年MM月dd日HH時mm分ss秒')}"></td>
+					<td th:text="*{#dates.format(modifiedAt, 'yyyy年MM月dd日HH時mm分ss秒')}"></td>
+				</tr>
+			</tbody>
+		</table>
+		<div class="position-relative">
+			<div class="p-3 mb-3 bg-info text-dark">現在の参加者数:</div>
+			<div class="position-absolute bottom-50 end-50"></div>
+		</div>
+		<h1>イベント参加者</h1>
+		<table class="table table-striped mt-4">
+			<thead class="bg-primary text-white">
+				<tr>
+					<th>ユーザID</th>
+					<th>ユーザ名</th>
+					<th>作成日時</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="event: ${event}" th:object="${event}">
+					<td th:text="*{user.id}"></td>
+					<td th:text="*{user.email}"></td>
+					<td th:text="*{#dates.format(createdAt, 'yyyy年MM月dd日HH時mm分ss秒')}"></td>
+				</tr>
+			</tbody>
+		</table>
+		<div class="position-relative">
+			<div class="position-absolute bottom-40 end-50">
+				<a th:href="@{/admin/eventusers/create/{id}(id=*{id})}" class="btn btn-primary">参加する</a>
+			</div>
+		</div>
+<!--		<th:block>-->
+<!--			<th:block th:if="${flag == 1}" th:object="${flag}">-->
+<!--				<p>OKです</p> 表示される-->
+<!--			</th:block>-->
+<!--		</th:block>-->
+	</div>
+</body>
+
+</html>

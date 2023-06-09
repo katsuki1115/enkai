@@ -37,4 +37,9 @@ public class EventUser extends AbstractEntity{
 	@JoinColumn(name = "user_id")
 	@NotNull(message = "顧客は必須入力です")
 	private User user;
+	
+//	public int counter() {
+//		int count;
+//		if()
+//	}
 }
