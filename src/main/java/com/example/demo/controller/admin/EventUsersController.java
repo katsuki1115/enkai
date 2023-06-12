@@ -44,13 +44,25 @@ public class EventUsersController {
 			eventuser.setUser(editUser);
 			//新規登録
 			eventuserService.save(eventuser);
-			int flag = 1;
-			model.addAttribute("flag", flag);
 			flash = new FlashData().success("更新しました");
 		} catch (Exception e) {
 			flash = new FlashData().danger("該当データがありません");
 		}
 		ra.addFlashAttribute("flash", flash);
 		return "redirect:/admin/events/view/" + id;
+	}
+	
+	@GetMapping(value = "/delete/{id}")
+	public String delete(@PathVariable Integer id, EventUser eventuser, Model model, BindingResult result, RedirectAttributes ra) {
+		FlashData flash;
+		try {
+			//削除
+			eventuserService.deleteById(id);
+			flash = new FlashData().success("削除しました");
+		} catch (Exception e) {
+			flash  = new FlashData().danger("削除できませんでした");
+		}
+		ra.addFlashAttribute("flash", flash);
+		return "redirect:/admin/events/view" + id;
 	}
 }
