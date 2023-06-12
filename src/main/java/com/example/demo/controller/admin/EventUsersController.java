@@ -29,17 +29,18 @@ public class EventUsersController {
 	@Autowired
 	UserService userService;
 
-	@GetMapping(value = "/create/{id}")
-	public String register(@PathVariable Integer id, EventUser eventuser, Model model, BindingResult result, RedirectAttributes ra) {
+	@GetMapping(value = "/create/{eventId}")
+
+	public String register(@PathVariable Integer eventId, EventUser eventuser, Model model, BindingResult result, RedirectAttributes ra) {
 		FlashData flash;
 		String email = SecurityContextHolder.getContext().getAuthentication().getName();
 		User editUser;
 		try {
 			if (result.hasErrors()) {
-				return "admin/eventusers/create" + id;
+				return "admin/eventusers/create";
 			}
 			editUser = userService.findByEmail(email);
-			Event event = eventService.findById(id);
+			Event event = eventService.findById(eventId);
 			eventuser.setEvent(event);
 			eventuser.setUser(editUser);
 			//新規登録
@@ -49,20 +50,58 @@ public class EventUsersController {
 			flash = new FlashData().danger("該当データがありません");
 		}
 		ra.addFlashAttribute("flash", flash);
-		return "redirect:/admin/events/view/" + id;
+		return "redirect:/admin/events/view/" + eventId;
 	}
 	
-	@GetMapping(value = "/delete/{id}")
-	public String delete(@PathVariable Integer id, EventUser eventuser, Model model, BindingResult result, RedirectAttributes ra) {
+	@GetMapping(value = "/delete/{eventId}")
+	public String delete(@PathVariable Integer eventId, EventUser eventuser, Model model, BindingResult result, RedirectAttributes ra) {
 		FlashData flash;
+		String email = SecurityContextHolder.getContext().getAuthentication().getName();
+		User editUser;
 		try {
+			editUser = userService.findByEmail(email);
+			int editId = editUser.getId();
 			//削除
-			eventuserService.deleteById(id);
+			if ( eventuser.getUser().getId() == editId && eventuser.getEvent().getId() == eventId ) {
+				
+			}
+			//eventuserService.deleteById(eventId);
 			flash = new FlashData().success("削除しました");
 		} catch (Exception e) {
 			flash  = new FlashData().danger("削除できませんでした");
 		}
 		ra.addFlashAttribute("flash", flash);
-		return "redirect:/admin/events/view" + id;
+		return "redirect:/admin/events/view/" + eventId;
 	}
+	
+//	@GetMapping(value = "/create/{eventUserId}")
+//	public String register(@PathVariable Integer eventUserId, EventUser eventuser, Model model, BindingResult result,
+//			RedirectAttributes ra) {
+//		FlashData flash;
+//		String email = SecurityContextHolder.getContext().getAuthentication().getName();
+//		User editUser;
+//		Integer eventId = null;
+//		try {
+//			if (result.hasErrors()) {
+//				return "admin/eventusers/create";
+//			}
+//			editUser = userService.findByEmail(email);
+//			EventUser eventUserObject = eventUserService.findById(eventUserId);
+//			Event event = eventUserObject.getEvent();
+//			eventId = event.getId();
+//			eventuser.setEvent(event);
+//			eventuser.setUser(editUser);
+//			//新規登録
+//			eventuserService.save(eventuser);
+//			flash = new FlashData().success("更新しました");
+//		} catch (Exception e) {
+//			flash = new FlashData().danger("該当データがありません");
+//		}
+//		ra.addFlashAttribute("flash", flash);
+//		if (eventId == null) {
+//			return "redirect:/admin/events";
+//		} else {
+//			return "redirect:/admin/events/view/" + eventId;
+//		}
+//	}
 }

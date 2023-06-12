@@ -6,13 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.common.DataNotFoundException;
-import com.example.demo.dao.BaseDao;
+import com.example.demo.dao.EventUserDao;
 import com.example.demo.entity.EventUser;
 
 @Service
 public class EventUserService implements BaseService<EventUser> {
 	@Autowired
-	private BaseDao<EventUser> dao;
+	private EventUserDao dao;
 	
 	@Override
 	public List<EventUser> findAll() {
@@ -36,5 +36,9 @@ public class EventUserService implements BaseService<EventUser> {
 	public void deleteById(Integer id) {
 		// TODO 自動生成されたメソッド・スタブ
 		dao.deleteById(id);
+	}
+	public EventUser findByEventId(Integer id) throws DataNotFoundException {
+		// TODO 自動生成されたメソッド・スタブ
+		return dao.findByEventId(id);
 	}
 }

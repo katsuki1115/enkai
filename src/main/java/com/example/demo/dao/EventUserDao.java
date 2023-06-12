@@ -42,5 +42,13 @@ public class EventUserDao implements BaseDao<EventUser> {
 			System.out.println("no data");
 		}
 	}
+	
+	public EventUser findByEventId(Integer id) throws DataNotFoundException {
+		EventUser eventuser = this.repository.findByEventId(id);
+		if(eventuser == null) {
+			throw new DataNotFoundException();
+		}
+		return eventuser;
+	}
 
 }

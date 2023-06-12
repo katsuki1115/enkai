@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.example.demo.common.DataNotFoundException;
 import com.example.demo.entity.Event;
+import com.example.demo.entity.User;
 import com.example.demo.repository.EventRepository;
 
 @Repository
@@ -41,6 +42,14 @@ public class EventDao implements BaseDao<Event>{
 		} catch (DataNotFoundException e) {
 			System.out.println("no data");
 		}
+	}
+	
+	public Event findByUser(User editUser) throws DataNotFoundException {
+		Event event = this.repository.findByUser(editUser);
+		if(event == null) {
+			throw new DataNotFoundException();
+		}
+		return event;
 	}
 
 }

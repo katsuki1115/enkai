@@ -47,28 +47,33 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr th:each="event: ${event}" th:object="${event}">
+				<tr th:each="eventuser: ${eventuser}" th:object="${eventuser}">
 					<td th:text="*{user.id}"></td>
 					<td th:text="*{user.email}"></td>
 					<td th:text="*{#dates.format(createdAt, 'yyyy年MM月dd日HH時mm分ss秒')}"></td>
 				</tr>
 			</tbody>
 		</table>
-		<th:block>
-			<th:block th:if="${edituser == null}">
-				<div class="position-relative">
-					<div class="position-absolute bottom-40 end-50">
-						<a th:href="@{/admin/eventusers/create/{id}(id=*{id})}" class="btn btn-primary">参加する</a>
-					</div>
-				</div>
-			</th:block>
-			<th:block th:if="${edituser != null}" th:object="${edituser}">
-				<div class="position-relative">
-					<a th:href="@{/admin/eventusers/delete/{id}(id=*{id})}" class="btn btn-primary">参加取り消し</a>
-					<a th:href="@{/admin/chats/talk/{id}(id=*{id})}" class="btn btn-primary">チャット</a>
-				</div>
-			</th:block>
-		</th:block>
+		<div class="position-relative">
+			<a th:href="@{/admin/eventusers/create/{id}(id=*{id})}" class="btn btn-primary">参加する</a>
+			<a th:href="@{/admin/eventusers/delete/{id}(id=*{id})}" class="btn btn-primary">参加取り消し</a>
+			<a th:href="@{/admin/chats/talk/{id}(id=*{id})}" class="btn btn-primary">チャット</a>
+		</div>
+		<!--		<th:block>-->
+		<!--			<th:block th:if="${flag == 0}">-->
+		<!--				<div class="position-relative">-->
+		<!--					<div class="position-absolute bottom-40 end-50">-->
+		<!--						<a th:href="@{/admin/eventusers/create/{id}(id=*{id})}" class="btn btn-primary">参加する</a>-->
+		<!--					</div>-->
+		<!--				</div>-->
+		<!--			</th:block>-->
+		<!--			<th:block th:if="${flag == 1}" th:object="${edituser}">-->
+		<!--				<div class="position-relative">-->
+		<!--					<a th:href="@{/admin/eventusers/delete/{id}(id=*{id})}" class="btn btn-primary">参加取り消し</a>-->
+		<!--					<a th:href="@{/admin/chats/talk/{id}(id=*{id})}" class="btn btn-primary">チャット</a>-->
+		<!--				</div>-->
+		<!--			</th:block>-->
+		<!--		</th:block>-->
 	</div>
 </body>
 
