@@ -13,7 +13,7 @@ import com.example.demo.repository.EventUserRepository;
 public class EventUserDao implements BaseDao<EventUser> {
 	@Autowired
 	EventUserRepository repository;
-	
+
 	@Override
 	public List<EventUser> findAll() {
 		// TODO 自動生成されたメソッド・スタブ
@@ -43,12 +43,31 @@ public class EventUserDao implements BaseDao<EventUser> {
 		}
 	}
 	
-	public EventUser findByEventId(Integer id) throws DataNotFoundException {
-		EventUser eventuser = this.repository.findByEventId(id);
+	public List<EventUser> findByEventId(Integer id) throws DataNotFoundException {
+		List<EventUser> eventuser = this.repository.findByEventId(id);
 		if(eventuser == null) {
 			throw new DataNotFoundException();
 		}
 		return eventuser;
 	}
-
+	
+	public void deleteByUserIdAndEventId(Integer UserId, Integer EditId) throws DataNotFoundException {
+		try {
+			EventUser user = this.findById(UserId);
+			EventUser event = this.findById(EditId);
+			this.repository.deleteByUserIdAndEventId(user.getId(), event.getId());
+		} catch (DataNotFoundException e) {
+			System.out.println("no data");
+		}
+	}
+	
+//	public void deleteByUserAndEvent(Integer User, Integer Edit) throws DataNotFoundException {
+//		try {
+//			EventUser user = this.findById(User);
+//			EventUser event = this.findById(Edit);
+//			this.repository.deleteByUserAndEvent(user.getId(), event.getId());
+//		} catch (DataNotFoundException e) {
+//			System.out.println("no data");
+//		}
+//	}
 }

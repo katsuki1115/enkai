@@ -39,7 +39,7 @@ public class EventService implements BaseService<Event> {
 		dao.deleteById(id);
 	}
 
-	public Event findByUser(User editUser) throws DataNotFoundException {
+	public List<Event> findByUser(User editUser) throws DataNotFoundException {
 		return dao.findByUser(editUser);
 	}
 }

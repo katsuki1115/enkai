@@ -15,6 +15,7 @@ import com.example.demo.entity.Event;
 import com.example.demo.entity.EventUser;
 import com.example.demo.entity.User;
 import com.example.demo.service.BaseService;
+import com.example.demo.service.EventUserService;
 import com.example.demo.service.UserService;
 
 @Controller
@@ -28,6 +29,9 @@ public class EventUsersController {
 	
 	@Autowired
 	UserService userService;
+	
+	@Autowired
+	EventUserService eventUserService;
 
 	@GetMapping(value = "/create/{eventId}")
 
@@ -54,18 +58,17 @@ public class EventUsersController {
 	}
 	
 	@GetMapping(value = "/delete/{eventId}")
-	public String delete(@PathVariable Integer eventId, EventUser eventuser, Model model, BindingResult result, RedirectAttributes ra) {
+	public String delete(@PathVariable Integer eventId, Model model, BindingResult result, RedirectAttributes ra) {
 		FlashData flash;
 		String email = SecurityContextHolder.getContext().getAuthentication().getName();
 		User editUser;
 		try {
 			editUser = userService.findByEmail(email);
-			int editId = editUser.getId();
+			Integer editId = editUser.getId();
+			
 			//削除
-			if ( eventuser.getUser().getId() == editId && eventuser.getEvent().getId() == eventId ) {
-				
-			}
-			//eventuserService.deleteById(eventId);
+			eventUserService.deleteByUserIdAndEventId(editId, eventId);
+			//eventUserService.deleteByUserAndEvent(editId, eventId);
 			flash = new FlashData().success("削除しました");
 		} catch (Exception e) {
 			flash  = new FlashData().danger("削除できませんでした");
@@ -74,34 +77,4 @@ public class EventUsersController {
 		return "redirect:/admin/events/view/" + eventId;
 	}
 	
-//	@GetMapping(value = "/create/{eventUserId}")
-//	public String register(@PathVariable Integer eventUserId, EventUser eventuser, Model model, BindingResult result,
-//			RedirectAttributes ra) {
-//		FlashData flash;
-//		String email = SecurityContextHolder.getContext().getAuthentication().getName();
-//		User editUser;
-//		Integer eventId = null;
-//		try {
-//			if (result.hasErrors()) {
-//				return "admin/eventusers/create";
-//			}
-//			editUser = userService.findByEmail(email);
-//			EventUser eventUserObject = eventUserService.findById(eventUserId);
-//			Event event = eventUserObject.getEvent();
-//			eventId = event.getId();
-//			eventuser.setEvent(event);
-//			eventuser.setUser(editUser);
-//			//新規登録
-//			eventuserService.save(eventuser);
-//			flash = new FlashData().success("更新しました");
-//		} catch (Exception e) {
-//			flash = new FlashData().danger("該当データがありません");
-//		}
-//		ra.addFlashAttribute("flash", flash);
-//		if (eventId == null) {
-//			return "redirect:/admin/events";
-//		} else {
-//			return "redirect:/admin/events/view/" + eventId;
-//		}
-//	}
 }

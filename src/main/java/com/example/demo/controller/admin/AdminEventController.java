@@ -1,5 +1,7 @@
 package com.example.demo.controller.admin;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -43,7 +45,7 @@ public class AdminEventController {
 		User editUser;
 		try {
 			editUser = userService.findByEmail(email);//ログインユーザ
-			Event events = eventsService.findByUser(editUser);
+			List<Event> events = eventsService.findByUser(editUser);
 			model.addAttribute("events", events);
 		} catch (Exception e) {
 		}
@@ -89,13 +91,19 @@ public class AdminEventController {
 		String email = SecurityContextHolder.getContext().getAuthentication().getName();
 		User editUser;
 		try {
+			//イベント詳細
 			editUser = userService.findByEmail(email);//ログインユーザ
 			Event event = eventsService.findById(id);
 			model.addAttribute("event", event);
-			//イベント参加者
-			EventUser eventuser = eventUserService.findByEventId(id);
-			model.addAttribute("eventuser", eventuser);
 			
+			//イベント参加者
+			int eventId = event.getId();
+			List<EventUser> eventuserAll = eventUserService.findByEventId(eventId);
+			model.addAttribute("eventuser", eventuserAll);
+			
+			//参加者数
+			int size = eventuserAll.size();
+			model.addAttribute("size", size);			
 //			int d = eventuser.getUser().getId();
 //			int D = editUser.getId();
 //			if(D == d) {

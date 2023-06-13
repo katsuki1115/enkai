@@ -21,6 +21,8 @@ public class AdminController {
 	public String list(Event event, Model model) {
 		List<Event> events = eventService.findAll();
 		model.addAttribute("events", events);
+		
+		//参加者数
 		return "admin/admin_home";
 	}
 }

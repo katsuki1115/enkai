@@ -44,12 +44,14 @@ public class EventDao implements BaseDao<Event>{
 		}
 	}
 	
-	public Event findByUser(User editUser) throws DataNotFoundException {
-		Event event = this.repository.findByUser(editUser);
+	public List<Event> findByUser(User editUser) throws DataNotFoundException {
+		List<Event> event = this.repository.findByUser(editUser);
 		if(event == null) {
 			throw new DataNotFoundException();
 		}
 		return event;
 	}
+	
+	
 
 }

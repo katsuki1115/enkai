@@ -13,7 +13,7 @@ import com.example.demo.entity.EventUser;
 public class EventUserService implements BaseService<EventUser> {
 	@Autowired
 	private EventUserDao dao;
-	
+
 	@Override
 	public List<EventUser> findAll() {
 		// TODO 自動生成されたメソッド・スタブ
@@ -37,8 +37,20 @@ public class EventUserService implements BaseService<EventUser> {
 		// TODO 自動生成されたメソッド・スタブ
 		dao.deleteById(id);
 	}
-	public EventUser findByEventId(Integer id) throws DataNotFoundException {
+
+	public List<EventUser> findByEventId(Integer id) throws DataNotFoundException {
 		// TODO 自動生成されたメソッド・スタブ
 		return dao.findByEventId(id);
 	}
+
+	public void deleteByUserIdAndEventId(Integer UserId, Integer EventId) throws DataNotFoundException{
+		// TODO 自動生成されたメソッド・スタブ
+		dao.deleteByUserIdAndEventId(UserId, EventId);
+	}
+	
+//	public void deleteByUserAndEvent(Integer User, Integer Event) throws DataNotFoundException{
+//		// TODO 自動生成されたメソッド・スタブ
+//		dao.deleteByUserAndEvent(User, Event);
+//	}
+
 }
