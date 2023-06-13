@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.example.demo.common.DataNotFoundException;
+import com.example.demo.entity.Event;
 import com.example.demo.entity.EventUser;
+import com.example.demo.entity.User;
 import com.example.demo.repository.EventUserRepository;
 
 @Repository
@@ -16,25 +18,21 @@ public class EventUserDao implements BaseDao<EventUser> {
 
 	@Override
 	public List<EventUser> findAll() {
-		// TODO 自動生成されたメソッド・スタブ
 		return repository.findAll();
 	}
 
 	@Override
 	public EventUser findById(Integer id) throws DataNotFoundException {
-		// TODO 自動生成されたメソッド・スタブ
 		return this.repository.findById(id).orElseThrow(() -> new DataNotFoundException());
 	}
 
 	@Override
 	public void save(EventUser eventuser) {
-		// TODO 自動生成されたメソッド・スタブ
 		this.repository.save(eventuser);
 	}
 
 	@Override
 	public void deleteById(Integer id) {
-		// TODO 自動生成されたメソッド・スタブ
 		try {
 			EventUser eventuser = this.findById(id);
 			this.repository.deleteById(eventuser.getId());
@@ -42,32 +40,16 @@ public class EventUserDao implements BaseDao<EventUser> {
 			System.out.println("no data");
 		}
 	}
-	
+
 	public List<EventUser> findByEventId(Integer id) throws DataNotFoundException {
 		List<EventUser> eventuser = this.repository.findByEventId(id);
-		if(eventuser == null) {
+		if (eventuser == null) {
 			throw new DataNotFoundException();
 		}
 		return eventuser;
 	}
-	
-	public void deleteByUserIdAndEventId(Integer UserId, Integer EditId) throws DataNotFoundException {
-		try {
-			EventUser user = this.findById(UserId);
-			EventUser event = this.findById(EditId);
-			this.repository.deleteByUserIdAndEventId(user.getId(), event.getId());
-		} catch (DataNotFoundException e) {
-			System.out.println("no data");
-		}
+
+	public void deleteByUserAndEvent(User user, Event event) throws DataNotFoundException {
+		this.repository.deleteByUserAndEvent(user, event);
 	}
-	
-//	public void deleteByUserAndEvent(Integer User, Integer Edit) throws DataNotFoundException {
-//		try {
-//			EventUser user = this.findById(User);
-//			EventUser event = this.findById(Edit);
-//			this.repository.deleteByUserAndEvent(user.getId(), event.getId());
-//		} catch (DataNotFoundException e) {
-//			System.out.println("no data");
-//		}
-//	}
 }
