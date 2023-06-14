@@ -18,3 +18,21 @@ ul{
 .form-group.error .error-message{
 	color: red;
 }
+
+.box {
+	width: auto;
+	margin: 0 0 10px 0;
+	border: 2px solid;
+	overflow: auto;
+	height: fit-content;
+}
+
+.box-left{
+	width: 300px;
+	margin: 0;
+}
+
+.box-right{
+	width: 300px;
+	float: left;
+}

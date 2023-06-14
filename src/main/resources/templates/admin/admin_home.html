@@ -26,7 +26,7 @@
 				<tr th:each="event: ${events}" th:object="${event}">
 					<td th:text="*{name}"></td>
 					<td th:text="*{max_participant}"></td>
-					<td th:text="${size}"></td>
+					<td th:text="*{eventuser.size}"></td>
 					<td th:text="*{category.name}"></td>
 					<td th:text="*{user.email}"></td>
 					<td th:text="*{#dates.format(createdAt, 'yyyy年MM月dd日HH時mm分ss秒')}"></td>

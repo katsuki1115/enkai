@@ -12,6 +12,7 @@ import jakarta.transaction.Transactional;
 
 public interface EventUserRepository extends JpaRepository<EventUser, Integer> {
 	public List<EventUser> findByEventId(Integer id);
+	public EventUser findByUser(User editUser);
 	
 	@Transactional
 	public void deleteByUserAndEvent(User user, Event event);

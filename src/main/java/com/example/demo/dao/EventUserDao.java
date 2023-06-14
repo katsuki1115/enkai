@@ -52,4 +52,12 @@ public class EventUserDao implements BaseDao<EventUser> {
 	public void deleteByUserAndEvent(User user, Event event) throws DataNotFoundException {
 		this.repository.deleteByUserAndEvent(user, event);
 	}
+
+	public EventUser findByUser(User editUser) throws DataNotFoundException{
+		EventUser eventuser = this.repository.findByUser(editUser);
+		if(eventuser == null) {
+			throw new DataNotFoundException();
+		}
+		return eventuser;
+	}
 }

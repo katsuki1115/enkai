@@ -35,7 +35,7 @@ public class Chat extends AbstractEntity {
 	
 	@ManyToOne
 	@JoinColumn(name = "event_id")
-	@NotNull(message = "カテゴリは必須入力です")
+	@NotNull(message = "イベントは必須入力です")
 	private Event event;
 	
 	@ManyToOne

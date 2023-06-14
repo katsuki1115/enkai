@@ -59,7 +59,7 @@ public class AdminUsersController {
 	 * 更新
 	 */
 	@PostMapping(value = "/edit")
-	public String update(@Validated() User editUser, BindingResult result, Model model, RedirectAttributes ra) {
+	public String update(@Validated User editUser, BindingResult result, Model model, RedirectAttributes ra) {
 		//SpringSecurity側からログインユーザの情報を取得する
 		String email = SecurityContextHolder.getContext().getAuthentication().getName();
 		FlashData flash;

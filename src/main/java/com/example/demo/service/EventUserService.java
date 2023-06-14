@@ -43,5 +43,9 @@ public class EventUserService implements BaseService<EventUser> {
 	public void deleteByUserAndEvent(User user, Event event) throws DataNotFoundException{
 		dao.deleteByUserAndEvent(user, event);
 	}
+	
+	public EventUser findByUser(User editUser) throws DataNotFoundException {
+		return dao.findByUser(editUser);
+	}
 
 }

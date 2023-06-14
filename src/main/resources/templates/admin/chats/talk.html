@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/layout}">
+
+<head>
+	<meta charset="UTF-8" th:remove="tag">
+</head>
+
+<body>
+	<div layout:fragment="content">
+		<h1><span th:text="${event.name}"></span></h1>
+
+		<tbody>
+			<div class="box" th:each="chat: ${chats}" th:object="${chat}">
+<!--				<div th:if="user.email ="-->
+				<p th:text="*{user.email}" style="margin: 0;"></p>
+				<p th:text="*{body}" style="margin: 0;"></p>
+				<p th:text="*{#dates.format(createdAt, 'yyyy年MM月dd日HH時mm分ss秒')}" style="margin: 0;"></p>
+			</div>
+		</tbody>
+
+		<form th:action="@{/admin/chats/create/{eventId}(eventId=*{event.id})}" th:object="${chat}" method="post">
+			<ul th:if="${#fields.hasErrors()}" class="alert alert-danger" role="alert">
+				<li th:each="err : ${#fields.errors('*')}">
+					<span th:text="${err}"></span>
+				</li>
+			</ul>
+			<div>
+				<class="form-group" th:classappend="${#fields.hasErrors('body')} ? error">
+					<label for="body">body</label>
+					<input class="form-control" type="text" id="body" th:field="*{body}">
+			</div>
+			<input type="hidden" th:fi>
+			<div>
+				<input class="btn btn-primary" type="submit" value="登録">
+			</div>
+		</form>
+	</div>
+</body>
+
+</html>

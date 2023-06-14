@@ -61,4 +61,7 @@ public class Event extends AbstractEntity {
 	@OneToMany(mappedBy = "event", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
 	List<EventUser> eventuser;
 	
+	@OneToMany(mappedBy = "event", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+	List<Chat> chat;
+	
 }
