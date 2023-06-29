@@ -95,7 +95,7 @@ public class AdminEventController {
 			editUser = userService.findByEmail(email);//ログインユーザ
 			Event event = eventsService.findById(id);
 			model.addAttribute("event", event);
-			
+			model.addAttribute("editUser", editUser);
 			//イベント参加者
 			int eventId = event.getId();
 			List<EventUser> eventuserAll = eventUserService.findByEventId(eventId);
@@ -103,16 +103,7 @@ public class AdminEventController {
 			
 			//参加者数
 			int size = eventuserAll.size();
-			model.addAttribute("size", size);			
-//			int d = eventuser.getUser().getId();
-//			int D = editUser.getId();
-//			if(D == d) {
-//				int flag = 0;
-//				model.addAttribute("flag", flag);
-//			}else {	
-//				int flag = 1;
-//				model.addAttribute("flag", flag);
-//			}
+			model.addAttribute("size", size);				
 		} catch (Exception e) {
 		}
 		return "admin/events/view";

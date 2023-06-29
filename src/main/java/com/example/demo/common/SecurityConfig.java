@@ -24,7 +24,7 @@ public class SecurityConfig {
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http.authorizeHttpRequests(authorize -> authorize
-				.requestMatchers("/users/login", "/error", "/admin/users/logout", "/users/create","/enkai").permitAll()
+				.requestMatchers("/", "/users/login", "/error", "/events/view/{id}", "/admin/users/logout", "/users/create").permitAll()
 				.requestMatchers("/webjars/**", "/css/**", "/js/**").permitAll()
 				.anyRequest().authenticated())
 				.formLogin(form -> form
@@ -34,7 +34,7 @@ public class SecurityConfig {
 						.failureUrl("/users/login?error"))
 				.logout(logout -> logout
 						.logoutUrl("/admin/users/logout")
-                        .logoutSuccessUrl("/enkai?logout")
+                        .logoutSuccessUrl("/logout")
                         .deleteCookies("JSESSIONID"))
 				.csrf()
 				.disable();

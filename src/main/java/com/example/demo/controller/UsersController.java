@@ -20,7 +20,7 @@ import com.example.demo.service.UserService;
 public class UsersController {
 	@Autowired
 	UserService userService;
-	
+			
 	/*
 	 * 新規作成画面表示
 	 */
@@ -69,6 +69,6 @@ public class UsersController {
 	
 	@PostMapping(value = "/login")
 	public String login() {
-		return "redirect:/admin/admin_home";
+		return "redirect:/admin";
 	}
 }

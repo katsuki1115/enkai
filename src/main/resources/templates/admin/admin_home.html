@@ -9,35 +9,35 @@
 <body>
 	<div layout:fragment="content">
 		<h1>イベント一覧</h1>
-		<table class="table table-striped mt-4">
-			<thead class="bg-primary text-white">
-				<tr>
-					<th>イベント名</th>
-					<th>最大人数</th>
-					<th>現在の参会者数</th>
-					<th>カテゴリ</th>
-					<th>管理ユーザ</th>
-					<th>作成日時</th>
-					<th>更新日時</th>
-					<th scope="col" class="actions">操作</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:each="event: ${events}" th:object="${event}">
-					<td th:text="*{name}"></td>
-					<td th:text="*{max_participant}"></td>
-					<td th:text="*{eventuser.size}"></td>
-					<td th:text="*{category.name}"></td>
-					<td th:text="*{user.email}"></td>
-					<td th:text="*{#dates.format(createdAt, 'yyyy年MM月dd日HH時mm分ss秒')}"></td>
-					<td th:text="*{#dates.format(modifiedAt, 'yyyy年MM月dd日HH時mm分ss秒')}"></td>
-					<td class="actions text-nowrap">
-						<a th:href="@{/admin/events/view/{id}(id=*{id})}" class="btn btn-primary">リンク</a>
-					</td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
+			<table class="table table-striped mt-4">
+				<thead class="bg-primary text-white">
+					<tr>
+						<th>イベント名</th>
+						<th>最大人数</th>
+						<th>現在の参会者数</th>
+						<th>カテゴリ</th>
+						<th>管理ユーザ</th>
+						<th>作成日時</th>
+						<th>更新日時</th>
+						<th scope="col" class="actions">操作</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="event: ${events}" th:object="${event}">
+						<td th:text="*{name}"></td>
+						<td th:text="*{max_participant}"></td>
+						<td th:text="*{eventuser.size}"></td>
+						<td th:text="*{category.name}"></td>
+						<td th:text="*{user.email}"></td>
+						<td th:text="*{#dates.format(createdAt, 'yyyy年MM月dd日HH時mm分ss秒')}"></td>
+						<td th:text="*{#dates.format(modifiedAt, 'yyyy年MM月dd日HH時mm分ss秒')}"></td>
+						<td class="actions text-nowrap">
+							<a th:href="@{/admin/events/view/{id}(id=*{id})}" class="btn btn-primary">リンク</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
 </body>
 
 </html>

@@ -32,7 +32,7 @@
 					<td th:text="*{#dates.format(createdAt, 'yyyy年MM月dd日HH時mm分ss秒')}"></td>
 					<td th:text="*{#dates.format(modifiedAt, 'yyyy年MM月dd日HH時mm分ss秒')}"></td>
 					<td class="actions text-nowrap">
-						<a th:href="@{/admin/events/view/{id}(id=*{id})}" class="btn btn-primary">リンク</a>
+						<a th:href="@{/events/view/{id}(id=*{id})}" class="btn btn-primary">リンク</a>
 					</td>
 				</tr>
 			</tbody>
